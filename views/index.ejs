@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Pollster</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <div class="container">
+      <h3>Create New Poll</h3>
+      <form action="/poll" method="POST" id="new-poll-form">
+        <label for="title">Title</label>
+        <input type="text" name="title" required></input>
+        <br>
+        <label for="option1">Option 1</label>
+        <input type="text" name="option1" required></input>
+        <br>
+        <label for="option2">Option 2</label>
+        <input type="text" name="option2" required></input>
+        <br>
+        <button type="button" id="add-option-button">Add option</button>
+        <button>Add</button>
+      </form>
+      <br>
+      <hr>
+      <% polls.slice().reverse().forEach(function(poll) { %>
+        <%- include('poll', {poll: poll, showComments: false}) %>
+      <% }) %>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/jquery.js" charset="utf-8"></script>
+    <script src="/js/site.js" charset="utf-8"></script>
+  </body>
+</html>

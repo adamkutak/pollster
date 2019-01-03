@@ -1,0 +1,129 @@
+.poll {
+  display: block;
+  vertical-align: top;
+  border-radius: 10px;
+  padding: 2rem;
+  color: black;
+  background-color: #F8F8F8;
+  margin-bottom: 1rem;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  border-color: rgb(192,0,0,.85);
+  border-style: solid;
+
+}
+
+.poll-button {
+  font-weight: bold;
+  background-color: #C00000;
+  color: white;
+  border: 0px;
+  border-radius: 5px;
+  font-size: 1.5rem;
+  min-width: 100px;
+}
+
+.poll-button:hover {
+  color: rgb(192,0,0);
+  background-color: rgb(192,0,0,.2);
+  cursor: pointer;
+}
+
+.poll-button:disabled {
+  background-color: black;
+}
+
+.poll-option {
+  padding: 0.5rem;
+}
+
+.poll-title {
+  font-size: 2rem;
+  text-align: center;
+  font-weight:500;
+}
+
+a{
+  color:black;
+  text-decoration: none;
+}
+
+a:hover{
+  color: rgb(192,0,0,.6);
+}
+
+body {
+  font-family: sans-serif;
+  background-color: #f0f0f0;
+}
+
+.poll-comment {
+  background-color: #E0E0E0;
+  margin: 0.5rem;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+  border-radius: 15px;
+}
+
+.comment-user, .comment-text {
+  display: inline-block;
+  padding: 0.5rem;
+}
+
+.comment-user {
+  background-color: #C00000;
+  float: left;
+  font-weight: bold;
+  text-align: center;
+  height: 100%;
+  width: 100px;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+  border-radius: 15px;
+
+}
+
+.poll-option-bar-container {
+  display: inline-block;
+  width: 200px;
+  height: 20px;
+  line-height: 20px;
+  background-color: #E0E0E0;
+  border-radius: 15px;
+}
+
+.poll-option-count {
+  display: inline-block;
+  width: 30px;
+  color: black;
+  font-weight: bold;
+}
+
+.poll-button-container, .poll-result-container {
+  display: inline-block;
+}
+
+.poll-result-container {
+  margin-left: 10px;
+}
+
+.poll-options {
+  text-align: center;
+}
+
+.poll-option-bar {
+  background-color: #C00000;
+  border-radius: 15px;
+}
+
+.poll-option-percentage {
+  display: inline-block;
+  font-weight: bold;
+
+}
+
+.poll-total-responses-container {
+  text-align: center;
+  font-weight: bold;
+}

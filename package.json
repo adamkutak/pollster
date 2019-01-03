@@ -1,0 +1,18 @@
+{
+  "name": "pollster",
+  "version": "1.0.0",
+  "description": "Poll website",
+  "main": "server.js",
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "socket.io": "^2.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "Iain and Adam",
+  "license": "ISC"
+}
