@@ -1,0 +1,14 @@
+Things To Do:
+Sort options
+Sub categories
+Home button
+Create new poll page
+Save server info
+Fix small display glitches (ie less than 10%)
+Better banner?
+Webpage Title
+Only able to vote once per user (encrypt??)
+Only show results once the user has voted!!!*** (this is how a large amount of votes will be acquired for each poll)
+Fancy details that are unique to each social media
+Fix formating when words are too long
+Replies
