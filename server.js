@@ -1,3 +1,4 @@
+//install npm: express and socket.io
 const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
@@ -14,13 +15,16 @@ class Poll {
     this.id = id
     this.comments = []
     this.totalResponses = 0
+    this.totalComments = 0
     this.responses = Array(options.length).fill(0)
+
   }
   respond(choiceIndex) {
     this.responses[choiceIndex]++
     this.totalResponses++
   }
   addComment(user, text) {
+    this.totalComments++;
     this.comments.push({
       user: user,
       text: text

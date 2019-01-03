@@ -1,4 +1,9 @@
 <div class="poll" data-poll-id="<%= poll.id %>">
+  <% if (showComments) { %>
+    <form action="/" method="GET">
+    <button class="homepage">Home</button>
+    </form>
+  <% } %>
   <div class="poll-title"><a href="/poll/<%= poll.id %>"><%= poll.title %></a></div>
   <br>
   <div class="poll-options">
@@ -20,6 +25,7 @@
   <br>
   <div class="poll-total-responses-container">
     Total votes: <span class="poll-total-responses"><%= poll.totalResponses %></span>
+    <div class="poll-total-comments">Comments: <%= poll.totalComments%></div>
   </div>
   <% if (showComments) { %>
     <br>

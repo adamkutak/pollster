@@ -124,6 +124,22 @@ body {
 }
 
 .poll-total-responses-container {
-  text-align: center;
+  text-align:centre;
   font-weight: bold;
+}
+
+.homepage{
+  font-weight: bold;
+  background-color: #C00000;
+  color: white;
+  border: 0px;
+  border-radius: 5px;
+  font-size: 1.5rem;
+  min-width: 100px;
+}
+
+.homepage:hover {
+  color: rgb(192,0,0);
+  background-color: rgb(192,0,0,.2);
+  cursor: pointer;
 }
