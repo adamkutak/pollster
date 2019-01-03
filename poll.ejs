@@ -1,0 +1,49 @@
+<div class="poll" data-poll-id="<%= poll.id %>">
+  <% if (showComments) { %>
+    <form action='/' method="GET">
+      <button>Home</button>
+    </form>
+  <% } %>
+  <div class="poll-title"><a href="/poll/<%= poll.id %>"><%= poll.title %></a></div>
+  <br>
+  <div class="poll-options">
+    <% poll.options.forEach(function(option, choiceId) { %>
+    <div class="poll-option" data-choice-id="<%= choiceId %>">
+      <div class="poll-button-container">
+        <button class="poll-button"><%= option %></button>
+      </div>
+      <div class="poll-result-container">
+        <div class="poll-option-count"><%= poll.responses[choiceId] %></div>
+        <div class="poll-option-bar-container">
+          <div class="poll-option-bar" style="width: <%= 100 * (poll.responses[choiceId] / poll.totalResponses) %>%;">&nbsp;</div>
+        </div>
+        <div class="poll-option-percentage"><%= poll.totalResponses ? Math.round(100 * (poll.responses[choiceId] / poll.totalResponses)) + "%" : "" %></div>
+      </div>
+    </div>
+    <% }) %>
+  </div>
+  <br>
+  <div class="poll-total-responses-container">
+    Total comments: <span class="poll-total-comments"><%= poll.totalComments %></span>
+    Total votes: <span class="poll-total-responses"><%= poll.totalResponses %></span>
+  </div>
+  <% if (showComments) { %>
+    <br>
+    <div class="poll-comments">
+      <% poll.comments.forEach(function(comment) { %>
+        <div class="poll-comment">
+          <div class="comment-user"><%= comment.user %></div>
+          <div class="comment-text"><%= comment.text %></div>
+        </div>
+      <% }) %>
+    </div>
+    <form action="/poll/<%= id %>/comment" method="POST">
+      <br>
+      <label for="user">Your name</label>
+      <input type="text" name="user" required>
+      <label for="text">Comment</label>
+      <input type="textarea" name="text" required>
+      <button>Submit</button>
+    </div>
+  <% } %>
+</div>

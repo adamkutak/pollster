@@ -1,4 +1,4 @@
-//install npm: express and socket.io
+//install express and socket.io
 const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
@@ -10,21 +10,20 @@ app.use(bodyParser.urlencoded({extended: true}))
 
 class Poll {
   constructor(title, options, id) {
+    this.totalComments = 0
     this.title = title
     this.options = options
     this.id = id
     this.comments = []
     this.totalResponses = 0
-    this.totalComments = 0
     this.responses = Array(options.length).fill(0)
-
   }
   respond(choiceIndex) {
     this.responses[choiceIndex]++
     this.totalResponses++
   }
   addComment(user, text) {
-    this.totalComments++;
+    this.totalComments++
     this.comments.push({
       user: user,
       text: text
@@ -63,7 +62,9 @@ app.get('/poll/:id', (req, res) => {
     res.status(404).send()
   }
 })
-
+app.post('/newpoll',(req,res)=>{
+  res.render('newpoll')
+})
 app.post('/poll/:id/comment', (req, res) => {
   const id = req.params.id
   const user = req.body.user
