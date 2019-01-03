@@ -8,6 +8,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
+    <div class="banner">
+      <div class="container-title-home">
+        Pollster
+      </div>
+      <form action="/newpoll" method="POST">
+        <button class="newpoll-button">New poll</button>
+      </form>
+      <form action="/" method="GET">
+        <button class="homepage">Home</button>
+      </form>
+    </div>
     <div class="container">
         <%- include('poll', {poll: poll, showComments: true}) %>
     </div>

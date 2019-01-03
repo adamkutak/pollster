@@ -50,6 +50,10 @@ app.get('/', function (req, res) {
   })
 })
 
+app.post('/newpoll', (req, res)=> {
+  res.render('newpoll')
+})
+
 app.get('/poll/:id', (req, res) => {
   //show the user one poll
   id = req.params.id

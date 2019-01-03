@@ -1,3 +1,18 @@
+.banner{
+  top:0px;
+  left: 0px;
+  position: fixed;
+  width:100%;
+  background-color: rgb(192,0,0);
+  outline-color: #F8F8F8;
+  outline-style: solid;
+  outline-width: thin;
+
+}
+
+.container{
+  padding-top: 3rem;
+}
 .poll {
   display: block;
   vertical-align: top;
@@ -17,7 +32,7 @@
 .poll-button {
   font-weight: bold;
   background-color: #C00000;
-  color: white;
+  color: #F8F8F8;
   border: 0px;
   border-radius: 5px;
   font-size: 1.5rem;
@@ -57,6 +72,7 @@ body {
   font-family: sans-serif;
   background-color: #f0f0f0;
 }
+
 
 .poll-comment {
   background-color: #E0E0E0;
@@ -128,18 +144,57 @@ body {
   font-weight: bold;
 }
 
-.homepage{
+.container-title-home{
+  color: #F8F8F8;
+  text-align: center;
+  font-weight: bold;
+  font-size: 3rem;
+  border:5px;
+
+}
+
+.create-poll-title{
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.main-button{
   font-weight: bold;
   background-color: #C00000;
-  color: white;
+  color: #F8F8F8;
   border: 0px;
   border-radius: 5px;
   font-size: 1.5rem;
   min-width: 100px;
 }
 
-.homepage:hover {
+.main-button:hover {
   color: rgb(192,0,0);
   background-color: rgb(192,0,0,.2);
+  cursor: pointer;
+}
+
+.newpoll-button,.homepage{
+  position:absolute;
+  font-weight: bold;
+  background-color: #F8F8F8;
+  color: rgb(192,0,0);
+  border: 0px;
+  border-radius: 5px;
+  font-size: 1.5rem;
+  min-width: 100px;
+  top:25%;
+}
+.newpoll-button{
+  left:5%
+}
+
+.homepage{
+  left: 15%;
+}
+
+.newpoll-button:hover, .homepage:hover{
+  color: rgb(192,0,0,0.5);
+  background-color: #F8F8F8;
   cursor: pointer;
 }
