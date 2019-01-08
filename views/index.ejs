@@ -7,24 +7,22 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
+
   <body>
+
+  <div class="banner">
+    <div class="container-title-home">
+      Pollster
+    </div>
+    <form action="/newpoll" method="POST">
+      <button class="newpoll-button">New poll</button>
+    </form>
+    <form action="/" method="GET">
+      <button class="homepage">Home</button>
+    </form>
+  </div>
+
     <div class="container">
-      <h3>Create New Poll</h3>
-      <form action="/poll" method="POST" id="new-poll-form">
-        <label for="title">Title</label>
-        <input type="text" name="title" required></input>
-        <br>
-        <label for="option1">Option 1</label>
-        <input type="text" name="option1" required></input>
-        <br>
-        <label for="option2">Option 2</label>
-        <input type="text" name="option2" required></input>
-        <br>
-        <button type="button" id="add-option-button">Add option</button>
-        <button>Add</button>
-      </form>
-      <br>
-      <hr>
       <% polls.slice().reverse().forEach(function(poll) { %>
         <%- include('poll', {poll: poll, showComments: false}) %>
       <% }) %>

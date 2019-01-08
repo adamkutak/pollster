@@ -1,29 +1,33 @@
-//install express and socket.io
+//install npm: express and socket.io
 const express = require('express')
 const bodyParser = require('body-parser')
+var cookieParser = require('cookie-parser')
 const app = express()
 const http = require('http').Server(app)
 const io = require('socket.io')(http)
 app.use(express.static('public'));
-app.set('view engine', 'ejs')
+app.use(cookieParser())
 app.use(bodyParser.urlencoded({extended: true}))
+app.set('view engine', 'ejs')
+
 
 class Poll {
   constructor(title, options, id) {
-    this.totalComments = 0
     this.title = title
     this.options = options
     this.id = id
     this.comments = []
     this.totalResponses = 0
+    this.totalComments = 0
     this.responses = Array(options.length).fill(0)
+
   }
   respond(choiceIndex) {
     this.responses[choiceIndex]++
     this.totalResponses++
   }
   addComment(user, text) {
-    this.totalComments++
+    this.totalComments++;
     this.comments.push({
       user: user,
       text: text
@@ -35,18 +39,33 @@ const polls = [];
 polls.push(new Poll('Hit or miss?', ['hit', 'miss'], 0))
 polls.push(new Poll('Yes or no?', ['yes', 'no'], 1))
 
-io.on('connection', function(socket){
+var userID = 0
+io.on('connection', function(socket,req,res){
   console.log('a user connected')
   socket.on('disconnect', function() {
     console.log('user disconnected')
   })
 })
 
+app.get('/getuser', (req, res)=>{
+  //shows all the cookies
+  res.send(req.cookies);
+});
+
 app.get('/', function (req, res) {
   //show all polls
+  if (req.cookies==null){
+    res.cookie("userID", userID);
+    userID++
+  }
   res.render('index', {
     polls: polls
   })
+})
+
+app.post('/newpoll', (req, res)=> {
+  console.log('cookies:' + req.cookies)
+  res.render('newpoll')
 })
 
 app.get('/poll/:id', (req, res) => {
@@ -62,9 +81,7 @@ app.get('/poll/:id', (req, res) => {
     res.status(404).send()
   }
 })
-app.post('/newpoll',(req,res)=>{
-  res.render('newpoll')
-})
+
 app.post('/poll/:id/comment', (req, res) => {
   const id = req.params.id
   const user = req.body.user
@@ -73,7 +90,7 @@ app.post('/poll/:id/comment', (req, res) => {
     res.status(404).send()
   }
   else {
-    polls[id].addComment(user, text)
+    polls[id].addComment(req.cookies."userID", text)
     res.redirect('/poll/' + id)
   }
 })
