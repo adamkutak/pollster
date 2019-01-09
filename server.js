@@ -1,12 +1,15 @@
 //install npm: express and socket.io
+//For cookies inspall npm cookies and nom cookie-parser
 const express = require('express')
 const bodyParser = require('body-parser')
+var cookieParser = require('cookie-parser')
 const app = express()
 const http = require('http').Server(app)
 const io = require('socket.io')(http)
 app.use(express.static('public'));
-app.set('view engine', 'ejs')
+app.use(cookieParser())
 app.use(bodyParser.urlencoded({extended: true}))
+app.set('view engine', 'ejs')
 
 class Poll {
   constructor(title, options, id) {
@@ -17,6 +20,7 @@ class Poll {
     this.totalResponses = 0
     this.totalComments = 0
     this.responses = Array(options.length).fill(0)
+    this.list=Array();
 
   }
   respond(choiceIndex) {
@@ -36,15 +40,27 @@ const polls = [];
 polls.push(new Poll('Hit or miss?', ['hit', 'miss'], 0))
 polls.push(new Poll('Yes or no?', ['yes', 'no'], 1))
 
-io.on('connection', function(socket){
+var userID = 0//ID given to each user in the cookies
+io.on('connection', function(socket,req,res){
   console.log('a user connected')
   socket.on('disconnect', function() {
     console.log('user disconnected')
   })
 })
 
+app.get('/getuser', (req, res)=>{
+  //shows all the cookies
+  res.send(req.cookies);
+});
+
 app.get('/', function (req, res) {
   //show all polls
+  //console.log(req.cookies['userID'])//Read user's ID from cookies if it's null then run function
+  if (req.cookies["userID"]==null){//requests the userID if it doesnt exits then...
+    userID++
+    res.cookie("userID", userID);//sets the userID for a new user
+    //console.log("new user " +req.cookies)
+  }
   res.render('index', {
     polls: polls
   })
@@ -81,21 +97,37 @@ app.post('/poll/:id/comment', (req, res) => {
   }
 })
 
-app.post('/poll/:id/response', (req, res) => {
+app.post('/poll/:id/response', (req, res) => {//if userID has already voted for THIS poll then do not ADD another vote but change to new one
   //submit poll response
   const id = req.params.id
   const choice = req.body.choice
   console.log("Received response to poll " + id + ", choice: " + choice)
+  let voted=id.toString()+"/"+req.cookies["userID"].toString()
+  let condition=false;
+  console.log(voted)
+
   if (!polls[id]) {
     res.status(404).send()
   }
-  else {
-    polls[id].respond(choice)
-    io.emit('new poll responses', {
-      id: id,
-      responses: polls[id].responses
-    })
-    res.status(200).send()
+  else{//ADD if voted
+    polls[id].list.forEach(function(element){
+        console.log(element)
+        if(element==voted){
+          condition=true;
+          console.log("TRUE")
+        }
+      });
+    if(condition){
+      console.log("you have already voted")
+    }else{
+      polls[id].list.push(voted)
+      polls[id].respond(choice)
+      io.emit('new poll responses', {
+        id: id,
+        responses: polls[id].responses
+      })
+      res.status(200).send()
+    }
   }
 })
 
