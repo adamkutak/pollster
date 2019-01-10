@@ -24,17 +24,6 @@
   </div>
   <% if (showComments) { %>
     <br>
-
-    <hr>
-    <br>
-    <div class="poll-comments">
-      <% poll.comments.forEach(function(comment) { %>
-        <div class="poll-comment">
-          <div class="comment-user"><%= comment.user %></div>
-          <div class="comment-text"><%= comment.text %></div>
-        </div>
-      <% }) %>
-    </div>
     <form action="/poll/<%= id %>/comment" method="POST">
       <br>
       <label for="user">Your name</label>
@@ -42,6 +31,24 @@
       <label for="text">Comment</label>
       <input type="textarea" name="text" required>
       <button>Submit</button>
+    </form>
+    <hr>
+    <br>
+    <div class="poll-comments">
+      <% poll.comments.forEach(function(comment) { %>
+        <div class="poll-comment">
+          <div class="comment-user"><%= comment.user %></div>
+          <div class="comment-text"><%= comment.text %></div>
+          <form action="/poll/<%= id %>/comment/<%=JSON.stringify(comment)%>" method="POST">
+            <br>
+            <label for="user">Your name</label>
+            <input type="text" name="user" required>
+            <label for="text">Comment</label>
+            <input type="textarea" name="text" required>
+            <button>Reply</button>
+          </form>
+        </div>
+      <% }) %>
     </div>
   <% } %>
 </div>
