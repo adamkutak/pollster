@@ -18,6 +18,7 @@ socket.on('new poll responses', function(data) {
 })
 
 $(".poll-button").on("click", function(event) {
+  var $button = $(this)
   var allButtons =$(this).parents(".poll").find(".poll-button")
   allButtons.attr("disabled", "disabled")
   var choiceId = $(this).parents(".poll-option").data("choice-id")
@@ -25,6 +26,8 @@ $(".poll-button").on("click", function(event) {
   $.post("/poll/" + pollId + "/response", {
     choice: choiceId
   }, function() {
+    allButtons.removeClass("poll-button-chosen")
+    $button.addClass("poll-button-chosen")
     allButtons.removeAttr("disabled")
   })
 })

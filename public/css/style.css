@@ -45,6 +45,14 @@
   cursor: pointer;
 }
 
+.poll-button:hover:disabled {
+  color: #F8F8F8;
+}
+
+.poll-button.poll-button-chosen {
+  background-color: rgb(192,0,0,0.5);
+}
+
 .poll-button:disabled {
   background-color: black;
 }

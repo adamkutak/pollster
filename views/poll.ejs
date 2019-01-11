@@ -5,7 +5,7 @@
     <% poll.options.forEach(function(option, choiceId) { %>
     <div class="poll-option" data-choice-id="<%= choiceId %>">
       <div class="poll-button-container">
-        <button class="poll-button"><%= option %></button>
+        <button class="poll-button<%= (choice == choiceId) ? " poll-button-chosen" : "" %>"><%= option %></button>
       </div>
       <div class="poll-result-container">
         <div class="poll-option-count"><%= poll.responses[choiceId] %></div>

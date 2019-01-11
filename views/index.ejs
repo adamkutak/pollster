@@ -23,8 +23,8 @@
   </div>
 
     <div class="container">
-      <% polls.slice().reverse().forEach(function(poll) { %>
-        <%- include('poll', {poll: poll, showComments: false}) %>
+      <% polls.slice().reverse().forEach(function(poll, id) { %>
+        <%- include('poll', {poll: poll, showComments: false, choice: choices[polls.length - 1 - id]}) %>
       <% }) %>
     </div>
     <script src="/socket.io/socket.io.js"></script>

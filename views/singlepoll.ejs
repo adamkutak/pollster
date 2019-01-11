@@ -20,7 +20,7 @@
       </form>
     </div>
     <div class="container">
-        <%- include('poll', {poll: poll, showComments: true}) %>
+        <%- include('poll', {poll: poll, showComments: true, choice: choice}) %>
     </div>
     <script src="/socket.io/socket.io.js"></script>
     <script src="/js/jquery.js" charset="utf-8"></script>
